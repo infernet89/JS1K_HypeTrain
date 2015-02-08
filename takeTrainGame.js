@@ -1,3 +1,8 @@
+/*
+Refactor manuale variabili:
+speedx=sx
+speedy=sy
+*/
 function omino() {
   var o=new Object();
   o.sx=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
@@ -14,10 +19,14 @@ function omino() {
   //TODO aggiungi 3d-like
   o.draw = function () {
   	//first, we move it
-  	if(Kpressed[68] || Kpressed[39]) o.px+=o.sx;
+  	/*if(Kpressed[68] || Kpressed[39]) o.px+=o.sx;
   	if(Kpressed[65] || Kpressed[37]) o.px-=o.sx;
   	if(Kpressed[87] || Kpressed[38]) o.py-=o.sy;
-  	if(Kpressed[83] || Kpressed[40]) o.py+=o.sy;
+  	if(Kpressed[83] || Kpressed[40]) o.py+=o.sy;*/
+  	if(Kpressed[39]) o.px+=o.sx;
+  	if(Kpressed[37]) o.px-=o.sx;
+  	if(Kpressed[38]) o.py-=o.sy;
+  	if(Kpressed[40]) o.py+=o.sy;
 
   	//then, we draw
     c.save();
@@ -133,13 +142,13 @@ function run()
   
     //overlay with information
     c.save();
-    c.globalAlpha=0.6;
+    //c.globalAlpha=0.6;
     c.fillStyle="Gray";
     c.fillRect(0,0,330,50);
     c.fillRect(700,0,100,50);
     c.scale(0.7,0.7);
     c.translate(-pg.px+9,-pg.py+9);
-    c.globalAlpha=0.9;
+    //c.globalAlpha=0.9;
     pg.draw();
     c.restore();
     c.fillStyle="Black";
@@ -149,7 +158,9 @@ function run()
     c.fillText(totaltime.toFixed(1)+"s",710,35);
 
     //collision check
+    //console.log(pg.px+" "+pg.py);
     if(pg.px>train.px && pg.px<train.px+20 && pg.py>train.py && pg.py<train.py+20)
+    //if(Math.abs(pg.px-train.px+10)<10 && Math.abs(pg.py-train.py+10)<10) BIGGER :O
     {
     	c.fillStyle="Green";
     	c.fillRect(200,200,400,200);
@@ -159,6 +170,7 @@ function run()
     	clearInterval(activeTask);
     }
     else if(pg.px>800 || pg.px<-50 || pg.py>600 || pg.py<-50)
+    //else if(pg.px%800<0 || pg.py%600<0)
     {
     	c.fillStyle="Red";
     	c.fillRect(200,200,400,200);
