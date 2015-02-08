@@ -1,5 +1,50 @@
-var tmp,tmp1;
-train=new Object();
+function omino() {
+  var o=new Object();
+  o.speed=Math.random()*8+2;
+  //every man has 6 colors (can be reduced)
+  o.testa=randColor();
+  o.corpo=randColor();
+  o.gambadx=randColor();
+  o.gambasx=randColor();
+  o.bracciodx=randColor();
+  o.bracciosx=randColor();
+  o.px=rand(0,750);
+  o.py=rand(0,550);
+  //TODO aggiungi 3d-like
+  o.draw = function () {
+  	//first, we move it
+  	if(Kpressed[68] || Kpressed[39]) o.px+=o.speed;
+  	if(Kpressed[65] || Kpressed[37]) o.px-=o.speed;
+  	if(Kpressed[87] || Kpressed[38]) o.py-=o.speed;
+  	if(Kpressed[83] || Kpressed[40]) o.py+=o.speed;
+
+  	//then, we draw
+    c.save();
+	c.translate(o.px,o.py);
+	//body
+	c.fillStyle=o.corpo;
+	c.fillRect(15,10,15,20);
+	//head
+	c.fillStyle=o.testa;
+	c.beginPath();
+	c.arc(22,5,5,0,2*Math.PI);
+	c.fill()
+	//arms
+	c.fillStyle=o.bracciosx;
+	c.fillRect(10,15,5,10);
+	c.fillStyle=o.bracciodx;
+	c.fillRect(30,15,5,10);
+	//legs (OMG, he skipped leg day)
+	c.fillStyle=o.gambasx;
+	c.fillRect(15,28,5,15);
+	c.fillStyle=o.gambadx;
+	c.fillRect(25,28,5,15);
+
+	c.restore();
+  }
+  return o;
+}
+/*train=new Object();
 train.px=rand(0,750);
 train.py=rand(100,550);
 //TODO aggiungi 3d-like
@@ -25,90 +70,50 @@ train.draw=function () {
 		train.py=rand(100,550);	
 	}
 }
-function omino() {
-  this.speed=Math.random()*8+2;
-  //every man has 6 colors (can be reduced)
-  this.testa=randColor();
-  this.corpo=randColor();
-  this.gambadx=randColor();
-  this.gambasx=randColor();
-  this.bracciodx=randColor();
-  this.bracciosx=randColor();
-  this.px=rand(0,750);
-  this.py=rand(0,550);
-  //TODO aggiungi 3d-like
-  this.draw = function () {
-  	//first, we move it
-  	if(Kpressed[68] || Kpressed[39]) this.px+=this.speed;
-  	if(Kpressed[65] || Kpressed[37]) this.px-=this.speed;
-  	if(Kpressed[87] || Kpressed[38]) this.py-=this.speed;
-  	if(Kpressed[83] || Kpressed[40]) this.py+=this.speed;
-
-  	//then, we draw
-    c.save();
-	c.translate(this.px,this.py);
-	//body
-	c.fillStyle=this.corpo;
-	c.fillRect(15,10,15,20);
-	//head
-	c.fillStyle=this.testa;
-	c.beginPath();
-	c.arc(22,5,5,0,2*Math.PI);
-	c.fill()
-	//arms
-	c.fillStyle=this.bracciosx;
-	c.fillRect(10,15,5,10);
-	c.fillStyle=this.bracciodx;
-	c.fillRect(30,15,5,10);
-	//legs (OMG, he skipped leg day)
-	c.fillStyle=this.gambasx;
-	c.fillRect(15,28,5,15);
-	c.fillStyle=this.gambadx;
-	c.fillRect(25,28,5,15);
-
-	c.restore();
-  }
-}
-protagonista=new omino();
+*/
+protagonista=omino();
 protagonista.speed/=2;
 var passanti=[];
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
-passanti.push(new omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
 
 passanti.push(protagonista);
-passanti.push(train);
-setInterval(run, 33);
+//passanti.push(train);
 
 //keyboard controls
 var Kpressed=[];
 window.addEventListener('keydown',keyDown,false);
 window.addEventListener('keyup',keyUp,false);
+
+setInterval(run, 33);
+
+
 function run()
 {
 	//draw the background
@@ -120,6 +125,7 @@ function run()
     entry.draw();
     });
     passanti.sort(function(a, b){return a.py-b.py});
+  
     //overlay with information
     c.save();
     c.globalAlpha=0.6;
@@ -133,7 +139,7 @@ function run()
     c.fillStyle="Black";
     c.font = "30px Arial";
     c.fillText("Take me to the train!",40,35);
-
+/*
     if(protagonista.px>train.px && protagonista.px<train.px+20 && protagonista.py>train.py && protagonista.py<train.py+20)
     {
     	c.fillStyle="Green";
@@ -141,8 +147,9 @@ function run()
     	c.fillStyle="Black";
     	c.font = "70px Arial";
     	c.fillText("Well done!",240,320);
-    }
+    }*/
 }
+
 //TODO magari fare a meno di queste
 function keyDown(e) {
 	Kpressed[e.keyCode]=true;
