@@ -1,6 +1,7 @@
 function omino() {
   var o=new Object();
-  o.speed=Math.random()*8+2;
+  o.speedx=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
+  o.speedy=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
   //every man has 6 colors (can be reduced)
   o.testa=randColor();
   o.corpo=randColor();
@@ -13,10 +14,10 @@ function omino() {
   //TODO aggiungi 3d-like
   o.draw = function () {
   	//first, we move it
-  	if(Kpressed[68] || Kpressed[39]) o.px+=o.speed;
-  	if(Kpressed[65] || Kpressed[37]) o.px-=o.speed;
-  	if(Kpressed[87] || Kpressed[38]) o.py-=o.speed;
-  	if(Kpressed[83] || Kpressed[40]) o.py+=o.speed;
+  	if(Kpressed[68] || Kpressed[39]) o.px+=o.speedx;
+  	if(Kpressed[65] || Kpressed[37]) o.px-=o.speedx;
+  	if(Kpressed[87] || Kpressed[38]) o.py-=o.speedy;
+  	if(Kpressed[83] || Kpressed[40]) o.py+=o.speedy;
 
   	//then, we draw
     c.save();
@@ -44,7 +45,7 @@ function omino() {
   }
   return o;
 }
-/*train=new Object();
+train=new Object();
 train.px=rand(0,750);
 train.py=rand(100,550);
 //TODO aggiungi 3d-like
@@ -70,7 +71,7 @@ train.draw=function () {
 		train.py=rand(100,550);	
 	}
 }
-*/
+
 protagonista=omino();
 protagonista.speed/=2;
 var passanti=[];
@@ -104,14 +105,15 @@ passanti.push(omino());
 passanti.push(omino());
 
 passanti.push(protagonista);
-//passanti.push(train);
+passanti.push(train);
 
 //keyboard controls
 var Kpressed=[];
 window.addEventListener('keydown',keyDown,false);
 window.addEventListener('keyup',keyUp,false);
 
-setInterval(run, 33);
+var activeTask=setInterval(run, 33);
+var totaltime=0;
 
 
 function run()
@@ -131,6 +133,7 @@ function run()
     c.globalAlpha=0.6;
     c.fillStyle="Gray";
     c.fillRect(0,0,330,50);
+    c.fillRect(700,0,100,50);
     c.scale(0.7,0.7);
     c.translate(-protagonista.px+9,-protagonista.py+9);
     c.globalAlpha=0.9;
@@ -139,7 +142,10 @@ function run()
     c.fillStyle="Black";
     c.font = "30px Arial";
     c.fillText("Take me to the train!",40,35);
-/*
+    totaltime+=0.033;
+    c.fillText(totaltime.toFixed(1)+"s",710,35);
+
+    //collision check
     if(protagonista.px>train.px && protagonista.px<train.px+20 && protagonista.py>train.py && protagonista.py<train.py+20)
     {
     	c.fillStyle="Green";
@@ -147,7 +153,17 @@ function run()
     	c.fillStyle="Black";
     	c.font = "70px Arial";
     	c.fillText("Well done!",240,320);
-    }*/
+    	clearInterval(activeTask);
+    }
+    else if(protagonista.px>800 || protagonista.px<-50 || protagonista.py>600 || protagonista.py<-50)
+    {
+    	c.fillStyle="Red";
+    	c.fillRect(200,200,400,200);
+    	c.fillStyle="Black";
+    	c.font = "70px Arial";
+    	c.fillText("FAILED!",240,320);
+    	clearInterval(activeTask);
+    } 
 }
 
 //TODO magari fare a meno di queste
