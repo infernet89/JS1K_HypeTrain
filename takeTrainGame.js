@@ -1,7 +1,7 @@
 function omino() {
   var o=new Object();
-  o.speedx=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
-  o.speedy=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
+  o.sx=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
+  o.sy=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
   //every man has 6 colors (can be reduced)
   o.testa=randColor();
   o.corpo=randColor();
@@ -9,15 +9,15 @@ function omino() {
   o.gambasx=randColor();
   o.bracciodx=randColor();
   o.bracciosx=randColor();
-  o.px=rand(0,750);
-  o.py=rand(0,550);
+  o.px=Math.random()*750;
+  o.py=Math.random()*550;
   //TODO aggiungi 3d-like
   o.draw = function () {
   	//first, we move it
-  	if(Kpressed[68] || Kpressed[39]) o.px+=o.speedx;
-  	if(Kpressed[65] || Kpressed[37]) o.px-=o.speedx;
-  	if(Kpressed[87] || Kpressed[38]) o.py-=o.speedy;
-  	if(Kpressed[83] || Kpressed[40]) o.py+=o.speedy;
+  	if(Kpressed[68] || Kpressed[39]) o.px+=o.sx;
+  	if(Kpressed[65] || Kpressed[37]) o.px-=o.sx;
+  	if(Kpressed[87] || Kpressed[38]) o.py-=o.sy;
+  	if(Kpressed[83] || Kpressed[40]) o.py+=o.sy;
 
   	//then, we draw
     c.save();
@@ -46,8 +46,8 @@ function omino() {
   return o;
 }
 train=new Object();
-train.px=rand(0,750);
-train.py=rand(100,550);
+train.px=Math.random()*750;
+train.py=Math.random()*450+100;
 //TODO aggiungi 3d-like
 train.draw=function () {
 	c.save();
@@ -68,12 +68,13 @@ train.draw=function () {
 	if(train.px<-50)
 	{
 		train.px=800;
-		train.py=rand(100,550);	
+		train.py=Math.random()*450+100;
 	}
 }
 
-protagonista=omino();
-protagonista.speed/=2;
+pg=omino();
+pg.sx/=2;
+pg.sy/=2;
 var passanti=[];
 passanti.push(omino());
 passanti.push(omino());
@@ -104,13 +105,15 @@ passanti.push(omino());
 passanti.push(omino());
 passanti.push(omino());
 
-passanti.push(protagonista);
+passanti.push(pg);
 passanti.push(train);
 
 //keyboard controls
 var Kpressed=[];
-window.addEventListener('keydown',keyDown,false);
-window.addEventListener('keyup',keyUp,false);
+onkeydown=function (e) { Kpressed[e.keyCode]=true; }
+onkeyup=function (e) { Kpressed[e.keyCode]=false; }
+//window.addEventListener('keydown',keyDown,false);
+//window.addEventListener('keyup',keyUp,false);
 
 var activeTask=setInterval(run, 33);
 var totaltime=0;
@@ -135,9 +138,9 @@ function run()
     c.fillRect(0,0,330,50);
     c.fillRect(700,0,100,50);
     c.scale(0.7,0.7);
-    c.translate(-protagonista.px+9,-protagonista.py+9);
+    c.translate(-pg.px+9,-pg.py+9);
     c.globalAlpha=0.9;
-    protagonista.draw();
+    pg.draw();
     c.restore();
     c.fillStyle="Black";
     c.font = "30px Arial";
@@ -146,7 +149,7 @@ function run()
     c.fillText(totaltime.toFixed(1)+"s",710,35);
 
     //collision check
-    if(protagonista.px>train.px && protagonista.px<train.px+20 && protagonista.py>train.py && protagonista.py<train.py+20)
+    if(pg.px>train.px && pg.px<train.px+20 && pg.py>train.py && pg.py<train.py+20)
     {
     	c.fillStyle="Green";
     	c.fillRect(200,200,400,200);
@@ -155,7 +158,7 @@ function run()
     	c.fillText("Well done!",240,320);
     	clearInterval(activeTask);
     }
-    else if(protagonista.px>800 || protagonista.px<-50 || protagonista.py>600 || protagonista.py<-50)
+    else if(pg.px>800 || pg.px<-50 || pg.py>600 || pg.py<-50)
     {
     	c.fillStyle="Red";
     	c.fillRect(200,200,400,200);
@@ -167,20 +170,7 @@ function run()
 }
 
 //TODO magari fare a meno di queste
-function keyDown(e) {
-	Kpressed[e.keyCode]=true;
-	//alert(e.keyCode);
-}
-function keyUp(e) {
-	Kpressed[e.keyCode]=false;
-}
 function randColor()
 {
 	return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
-}
-function rand(da, a)
-{
-    if(da>a) return rand(a,da);
-    a=a+1;
-    return Math.floor(Math.random()*(a-da)+da);
 }
