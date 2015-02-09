@@ -2,6 +2,7 @@
 Refactor manuale variabili:
 speedx=sx
 speedy=sy
+2 * Math.PI=6.3
 */
 function omino() {
   var o=new Object();
@@ -40,7 +41,7 @@ function omino() {
     //head
     c.fillStyle=o.testa;
     c.beginPath();
-    c.arc(22,5,5,0,2*Math.PI);
+    c.arc(22,5,5,0,7);
     c.fill();
   	c.restore();
 
@@ -71,15 +72,14 @@ train.draw=function () {
 	c.fillRect(35,5,15,10);
 	//wheels
 	c.beginPath();
-	c.arc(12,43,7,0,2*Math.PI);
-	c.arc(40,43,7,0,2*Math.PI);
+	c.arc(12,43,7,0,7);
+	c.arc(40,43,7,0,7);
 	c.fill();
   c.restore();
 
 	//TODO si risparmia togliendo il movimento
 	//move it
-	train.px-=3;
-	if(train.px<-50)
+	if((train.px-=3)<-50)
 	{
 		train.px=800;
 		train.py=Math.random()*450+100;
