@@ -20,6 +20,7 @@ function omino() {
   o.py=Math.random()*550;
   //TODO aggiungi 3d-like
   o.draw = function () {
+    c.save();
   	//first, we move it
   	/*if(Kpressed[68] || Kpressed[39]) o.px+=o.sx;
   	if(Kpressed[65] || Kpressed[37]) o.px-=o.sx;
@@ -31,7 +32,6 @@ function omino() {
   	if(Kpressed[40]) o.py+=o.sy;
 
   	//then, we draw
-    c.save();
   	c.translate(o.px,o.py);
   	//body
   	c.fillStyle=o.corpo;
@@ -62,6 +62,7 @@ train.py=Math.random()*450+100;
 //TODO aggiungi 3d-like
 train.draw=function () {
 	c.save();
+  
 	c.translate(train.px,train.py);
 	c.fillStyle="black";
 	//structure
@@ -73,8 +74,7 @@ train.draw=function () {
 	c.arc(12,43,7,0,2*Math.PI);
 	c.arc(40,43,7,0,2*Math.PI);
 	c.fill()
-	c.restore();
-	//TODO si risparmi
+	//TODO si risparmia togliendo il movimento
 	//move it
 	train.px-=3;
 	if(train.px<-50)
@@ -82,6 +82,7 @@ train.draw=function () {
 		train.px=800;
 		train.py=Math.random()*450+100;
 	}
+  c.restore();
 }
 var passanti=[];
 pg=omino();
