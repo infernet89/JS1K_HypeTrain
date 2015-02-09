@@ -62,7 +62,7 @@ train.py=Math.random()*450+100;
 //TODO aggiungi 3d-like
 train.draw=function () {
 	c.save();
-  
+
 	c.translate(train.px,train.py);
 	c.fillStyle="black";
 	//structure
@@ -167,20 +167,20 @@ function run()
     //if(Math.abs(pg.px-train.px+10)<10 && Math.abs(pg.py-train.py+10)<10) BIGGER :O
     {
     	c.fillStyle="Green";
-    	c.fillRect(200,200,400,200);
+    	c.fillRect(300,270,120,50);
     	c.fillStyle="Black";
-    	c.font = "70px Arial";
-    	c.fillText("Well done!",240,320);
+    	c.font = "30px Arial";
+    	c.fillText("NICE!",300,300);
     	clearInterval(activeTask);
     }
     else if(pg.px>800 || pg.px<-50 || pg.py>600 || pg.py<-50)
     //else if((pg.px+100)%900<50 || (pg.py+100)%700<50) //BIGGER, apparently
     {
     	c.fillStyle="Red";
-    	c.fillRect(200,200,400,200);
+    	c.fillRect(300,270,120,50);
     	c.fillStyle="Black";
-    	c.font = "70px Arial";
-    	c.fillText("FAILED!",240,320);
+    	c.font = "30px Arial";
+    	c.fillText("FAIL!",300,300);
     	clearInterval(activeTask);
     } 
 }
