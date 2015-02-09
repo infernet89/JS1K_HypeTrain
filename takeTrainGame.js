@@ -8,8 +8,8 @@ function omino() {
   var o=new Object();
   o.sx=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()));
   o.sy=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()));
-  //o.sx=(5*Math.random()+2);
-  //o.sy=(5*Math.random()+2);
+  //o.sx=(5*Math.random()+2); //-20B
+  //o.sy=(5*Math.random()+2); //
   //every man has 6 colors (can be reduced)
   o.testa='#'+(Math.random()*0xFFFFFF<<0).toString(16);
   o.corpo='#'+(Math.random()*0xFFFFFF<<0).toString(16);
@@ -174,7 +174,7 @@ function run()
     	c.fillText("NICE!",300,300);
     	clearInterval(activeTask);
     }
-    else if(pg.px>800 || pg.px<-50 || pg.py>600 || pg.py<-50)
+    if(pg.px>800 || pg.px<-50 || pg.py>600 || pg.py<-50)
     //else if((pg.px+100)%900<50 || (pg.py+100)%700<50) //BIGGER, apparently
     {
     	c.fillStyle="Red";
