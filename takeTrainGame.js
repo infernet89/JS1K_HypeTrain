@@ -21,17 +21,8 @@ function omino() {
   //TODO aggiungi 3d-like
   o.draw = function () {
     c.save();
-  	//first, we move it
-  	/*if(Kpressed[68] || Kpressed[39]) o.px+=o.sx;
-  	if(Kpressed[65] || Kpressed[37]) o.px-=o.sx;
-  	if(Kpressed[87] || Kpressed[38]) o.py-=o.sy;
-  	if(Kpressed[83] || Kpressed[40]) o.py+=o.sy;*/
-  	if(Kpressed[39]) o.px+=o.sx;
-  	if(Kpressed[37]) o.px-=o.sx;
-  	if(Kpressed[38]) o.py-=o.sy;
-  	if(Kpressed[40]) o.py+=o.sy;
 
-  	//then, we draw
+  	//first, we draw
   	c.translate(o.px,o.py);
   	//body
   	c.fillStyle=o.corpo;
@@ -51,8 +42,17 @@ function omino() {
     c.beginPath();
     c.arc(22,5,5,0,2*Math.PI);
     c.fill();
-
   	c.restore();
+
+    //then, we move it
+    /*if(Kpressed[68] || Kpressed[39]) o.px+=o.sx;
+    if(Kpressed[65] || Kpressed[37]) o.px-=o.sx;
+    if(Kpressed[87] || Kpressed[38]) o.py-=o.sy;
+    if(Kpressed[83] || Kpressed[40]) o.py+=o.sy;*/
+    if(Kpressed[39]) o.px+=o.sx;
+    if(Kpressed[37]) o.px-=o.sx;
+    if(Kpressed[38]) o.py-=o.sy;
+    if(Kpressed[40]) o.py+=o.sy;
   }
   return o;
 }
@@ -64,7 +64,7 @@ train.draw=function () {
 	c.save();
 
 	c.translate(train.px,train.py);
-	c.fillStyle="black";
+	c.fillStyle="Black";
 	//structure
 	c.fillRect(0,15,50,23);
 	c.fillRect(5,0,5,15);
@@ -73,7 +73,9 @@ train.draw=function () {
 	c.beginPath();
 	c.arc(12,43,7,0,2*Math.PI);
 	c.arc(40,43,7,0,2*Math.PI);
-	c.fill()
+	c.fill();
+  c.restore();
+
 	//TODO si risparmia togliendo il movimento
 	//move it
 	train.px-=3;
@@ -82,7 +84,6 @@ train.draw=function () {
 		train.px=800;
 		train.py=Math.random()*450+100;
 	}
-  c.restore();
 }
 var passanti=[];
 pg=omino();
