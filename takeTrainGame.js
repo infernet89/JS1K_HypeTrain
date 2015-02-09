@@ -142,6 +142,7 @@ function run()
 	passanti.forEach(function(entry) {
     entry.draw();
     });
+    //COSTA 30B
     passanti.sort(function(a, b){return a.py-b.py});
   
     //overlay with information
@@ -158,6 +159,7 @@ function run()
     c.fillStyle="Black";
     c.font = "30px Serif";
     c.fillText("Take me to the train!",40,35);
+    //COSTA 53B
     totaltime+=0.033;
     c.fillText(totaltime.toFixed(1)+"s",710,35);
 
