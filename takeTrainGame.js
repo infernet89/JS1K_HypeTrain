@@ -57,7 +57,7 @@ function omino() {
   return o;
 }
 train=new Object();
-train.px=Math.random()*750;
+train.px=800;
 train.py=Math.random()*450+100;
 //TODO aggiungi 3d-like
 train.draw=function () {
