@@ -170,7 +170,7 @@ function run()
     	c.fillStyle="Green";
     	c.fillRect(300,270,80,40);
     	c.fillStyle="Black";
-    	c.font = "30px Serif";
+    	//c.font = "30px Serif";
     	c.fillText("NICE!",300,300);
     	clearInterval(activeTask);
     }
@@ -180,7 +180,7 @@ function run()
     	c.fillStyle="Red";
     	c.fillRect(300,270,80,40);
     	c.fillStyle="Black";
-    	c.font = "30px Serif";
+    	//c.font = "30px Serif";
     	c.fillText("FAIL!",300,300);
     	clearInterval(activeTask);
     } 

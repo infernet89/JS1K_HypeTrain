@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+  <!--
+  (c) js1k.com 2015
+  Note: submissions belong to their respectful owner, do not copy without their consent
+  -->
+  <head>
+    <meta charset="utf-8">
+    <title>JS1k 2010 - 197 - </title>
+    <meta name="author" content="Aivo Paas">
+    <link rel="icon" type="image/png" href="http://js1k.com/favicon.png">
+    <link rel="canonical" href="http://js1k.com/2010-first/demo/197">
+    <link rel="shortlink" href="http://js1k.com/197">
+    <script>
+      		setTimeout(function(){
+			var ga = document.createElement('script');
+			ga.async = true;
+			ga.defer = true;
+			ga.src = 'http://www.google-analytics.com/ga.js';
+			ga.onload = function(){try{_gat._getTracker('UA-19882353-1')._trackPageview();}catch(e){window.console&&console.log("ga fail :'( ");};};
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		}, 10);
+    </script>
+    <style>
+      /* http://qfox.nl/notes/333 */
+      body,html,iframe{margin:0;padding:0;border:0;width:100%;height:100%}
+      iframe{position:absolute;top:0;left:0;padding-top:50px;box-sizing:border-box}
+      header{position:relative;z-index:1;height:47px;padding-top:2px;border-bottom:1px solid #000;box-shadow:0 -10px 25px #ccc inset;background-color:#eee}
+      aside,div,h1,p{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;font-size:16px;font-weight:inherit;line-height:22px;padding:0;margin:0;cursor:default}
+      aside,h1{display:inline}
+      a{color:#000;text-decoration:none;border-bottom:1px dashed #000}
+      a:hover{border-bottom:1px solid red}
+      a[href="0"]{text-decoration:line-through;pointer-events:none;border-bottom:0;color:#ccc}
+      .button{float:left;width:40px;height:40px;line-height:40px;text-align:center;padding:0;margin:2px 0 0 10px;border:1px solid #888;border-color:#ddd #888 #888 #ddd;font-family:sans-serif;font-size:30px;font-weight:700;cursor:pointer}
+      .button:hover{color:red;border-bottom-color:#888}
+      .r{margin-right:10px}
+      time{display:none}
+    </style>
+
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>
+          <a href="http://js1k.com/">JS1k</a>
+          <a href="http://js1k.com/2010-first">2010</a>
+          <strong></strong> demo
+          &mdash;
+          "" by Aivo Paas
+        </h1>
+        <p>
+          <em>
+            Updated version of my Tetris game.
+          </em>
+        </p>
+        <aside>
+          &mdash;
+          1024 bytes
+          &mdash;
+          <a href="http://js1k.com/2010-first/details/197">demo details</a>
+          &mdash;
+          <a href="http://js1k.com/2010-first/demos">list of demos</a>
+          &mdash;
+          <a href="http://js1k.com/197" title="short link for your mobile devices" rel="nofollow">js1k.com/197</a>
+          <time datetime="2010-08-09" pubdate>2010-08-09</time>
+        </aside>
+      </div>
+
+      <a href="195" class="button p">&Larr;</a>
+      <a href="201" class="button n">&Rarr;</a>
+    </header>
+
+    <script type="demo">
+train=new Object();
+train.px=rand(0,750);
+train.py=rand(100,550);
+//TODO aggiungi 3d-like
+train.draw=function () {
+  c.save();
+  c.translate(train.px,train.py);
+  c.fillStyle="black";
+  //structure
+  c.fillRect(0,15,50,23);
+  c.fillRect(5,0,5,15);
+  c.fillRect(35,5,15,10);
+  //wheels
+  c.beginPath();
+  c.arc(12,43,7,0,2*Math.PI);
+  c.arc(40,43,7,0,2*Math.PI);
+  c.fill()
+  c.restore();
+  //move it
+  train.px-=3;
+  if(train.px<-50)
+  {
+    train.px=800;
+    train.py=rand(100,550); 
+  }
+}
+function omino() {
+  var o=new Object();
+  o.speed=Math.random()*8+2;
+  //every man has 6 colors (can be reduced)
+  o.testa=randColor();
+  o.corpo=randColor();
+  o.gambadx=randColor();
+  o.gambasx=randColor();
+  o.bracciodx=randColor();
+  o.bracciosx=randColor();
+  o.px=rand(0,750);
+  o.py=rand(0,550);
+  //TODO aggiungi 3d-like
+  o.draw = function () {
+    //first, we move it
+    if(Kpressed[68] || Kpressed[39]) o.px+=o.speed;
+    if(Kpressed[65] || Kpressed[37]) o.px-=o.speed;
+    if(Kpressed[87] || Kpressed[38]) o.py-=o.speed;
+    if(Kpressed[83] || Kpressed[40]) o.py+=o.speed;
+
+    //then, we draw
+    c.save();
+  c.translate(o.px,o.py);
+  //body
+  c.fillStyle=o.corpo;
+  c.fillRect(15,10,15,20);
+  //head
+  c.fillStyle=o.testa;
+  c.beginPath();
+  c.arc(22,5,5,0,2*Math.PI);
+  c.fill()
+  //arms
+  c.fillStyle=o.bracciosx;
+  c.fillRect(10,15,5,10);
+  c.fillStyle=o.bracciodx;
+  c.fillRect(30,15,5,10);
+  //legs (OMG, he skipped leg day)
+  c.fillStyle=o.gambasx;
+  c.fillRect(15,28,5,15);
+  c.fillStyle=o.gambadx;
+  c.fillRect(25,28,5,15);
+
+  c.restore();
+  }
+  return o;
+}
+protagonista=omino();
+protagonista.speed/=2;
+var passanti=[];
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+passanti.push(omino());
+
+passanti.push(protagonista);
+passanti.push(train);
+setInterval(run, 33);
+
+//keyboard controls
+var Kpressed=[];
+window.addEventListener('keydown',keyDown,false);
+window.addEventListener('keyup',keyUp,false);
+function run()
+{
+  //draw the background
+  c.fillStyle="Silver";
+  c.fillRect(0,0,800,600);
+
+  //draw characters
+  passanti.forEach(function(entry) {
+    entry.draw();
+    });
+    passanti.sort(function(a, b){return a.py-b.py});
+    //overlay with information
+    c.save();
+    c.globalAlpha=0.6;
+    c.fillStyle="Gray";
+    c.fillRect(0,0,330,50);
+    c.scale(0.7,0.7);
+    c.translate(-protagonista.px+9,-protagonista.py+9);
+    c.globalAlpha=0.9;
+    protagonista.draw();
+    c.restore();
+    c.fillStyle="Black";
+    c.font = "30px Arial";
+    c.fillText("Take me to the train!",40,35);
+
+    if(protagonista.px>train.px && protagonista.px<train.px+20 && protagonista.py>train.py && protagonista.py<train.py+20)
+    {
+      c.fillStyle="Green";
+      c.fillRect(200,200,400,200);
+      c.fillStyle="Black";
+      c.font = "70px Arial";
+      c.fillText("Well done!",240,320);
+    }
+}
+//TODO magari fare a meno di queste
+function keyDown(e) {
+  Kpressed[e.keyCode]=true;
+  //alert(e.keyCode);
+}
+function keyUp(e) {
+  Kpressed[e.keyCode]=false;
+}
+function randColor()
+{
+  return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+}
+function rand(da, a)
+{
+    if(da>a) return rand(a,da);
+    a=a+1;
+    return Math.floor(Math.random()*(a-da)+da);
+}
+    </script>
+    <script>
+      (function(){var doc=document;var header=doc.getElementsByTagName("header")[0];var firstChild=header.firstChild;var p=doc.getElementsByClassName("p")[0];var n=doc.getElementsByClassName("n")[0];header.insertBefore(p,firstChild);header.insertBefore(n,firstChild);header.appendChild(doc.getElementsByTagName("p")[0])})();
+      (function reload(){var doc=document;var header=doc.getElementsByTagName("header")[0];var iframe=doc.createElement("iframe");doc.body.appendChild(iframe);var iwin=iframe.contentWindow;var idoc=iframe.contentDocument;idoc.open();idoc.close();idoc.write('<!doctype html><head><meta charset="utf-8"><body>');idoc.head.innerHTML="<style>\n"+"html, body { margin: 0; padding: 0; border: 0; width: 100%; height: 100%; }\n"+"</style>\n";idoc.body.innerHTML="\n\t\t"+"<canvas"+' id="c"'+''+"></canvas>\n"+
+      (false?"<script>\x3c/script>\n":"")+"";var Audio=iwin.Audio;iwin.Audio=function(x){return new Audio(x)};if(false){var canvas=idoc.getElementsByTagName("canvas")[0];iwin.a=canvas.getContext("2d");iwin.b=idoc.body;iwin.c=canvas;var p2d=iwin.Path2D;function wrap(ctx){var fill=ctx.fill,clip=ctx.clip,stroke=ctx.stroke;ctx.scale=ctx.scale;ctx.drawFocusIfNeeded=ctx.drawFocusIfNeeded;ctx.ellipse=ctx.ellipse;ctx.fill=function(r){fill.call(ctx,r==="evenodd"?"evenodd":"nonzero")};ctx.stroke=
+        function(p){if(p&&p2d&&p instanceof p2d)stroke.call(ctx,p);else stroke.call(ctx)};ctx.clip=function(p){if(p&&p2d&&p instanceof p2d)clip.call(ctx,p);else clip.call(ctx)};return ctx}if(false){var cvs=iwin.c;var cNode=cvs.cloneNode;cvs.cloneNode=function(){var clone=cNode.apply(cvs,arguments);var cloneGet=clone.getContext;clone.getContext=function(){return wrap(cloneGet.call(clone,"2d"))};return clone};var get=cvs.getContext;cvs.getContext=function(){return wrap(get.call(cvs,"2d"))}}if(false)wrap(iwin.a)}idoc.body.clientWidth;
+        var demo=idoc.createElement("script");var scrpt=doc.querySelector('script[type="demo"]').textContent.replace(/m.location=m.location;/,"top.reload();");if(false)scrpt="A=0,B=0;"+scrpt;demo.textContent=scrpt;idoc.body.appendChild(demo);idoc.close();iframe.contentWindow.focus();var r=doc.createElement("div");r.innerHTML="&#8635;";r.className="button r";r.title="restart just the demo (local, without remote fetch)";window.reload=r.onclick=function(){doc.body.removeChild(iframe);r.parentElement.removeChild(r);
+          iframe=null;r=null;idoc=null;header=null;reload()};var firstLine=doc.getElementsByTagName("div")[0];header.insertBefore(r,firstLine)})();
+    </script>
+  </body>
+</html>
