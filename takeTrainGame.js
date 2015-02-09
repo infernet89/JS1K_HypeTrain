@@ -36,11 +36,6 @@ function omino() {
   	//body
   	c.fillStyle=o.corpo;
   	c.fillRect(15,10,15,20);
-  	//head
-  	c.fillStyle=o.testa;
-  	c.beginPath();
-  	c.arc(22,5,5,0,2*Math.PI);
-  	c.fill();
   	//arms
   	c.fillStyle=o.bracciosx;
   	c.fillRect(10,15,5,10);
@@ -51,6 +46,11 @@ function omino() {
   	c.fillRect(15,28,5,15);
   	c.fillStyle=o.gambadx;
   	c.fillRect(25,28,5,15);
+    //head
+    c.fillStyle=o.testa;
+    c.beginPath();
+    c.arc(22,5,5,0,2*Math.PI);
+    c.fill();
 
   	c.restore();
   }
@@ -83,11 +83,10 @@ train.draw=function () {
 		train.py=Math.random()*450+100;
 	}
 }
-
+var passanti=[];
 pg=omino();
 pg.sx/=2;
 pg.sy/=2;
-var passanti=[];
 passanti.push(omino());
 passanti.push(omino());
 passanti.push(omino());
