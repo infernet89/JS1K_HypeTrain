@@ -5,15 +5,17 @@ speedy=sy
 */
 function omino() {
   var o=new Object();
-  o.sx=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
-  o.sy=(Math.random()*5+2)*Math.pow(-1,Math.ceil(9*Math.random()));
+  o.sx=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()));
+  o.sy=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()));
+  //o.sx=(5*Math.random()+2);
+  //o.sy=(5*Math.random()+2);
   //every man has 6 colors (can be reduced)
-  o.testa=randColor();
-  o.corpo=randColor();
-  o.gambadx=randColor();
-  o.gambasx=randColor();
-  o.bracciodx=randColor();
-  o.bracciosx=randColor();
+  o.testa='#'+(Math.random()*0xFFFFFF<<0).toString(16);
+  o.corpo='#'+(Math.random()*0xFFFFFF<<0).toString(16);
+  o.gambadx='#'+(Math.random()*0xFFFFFF<<0).toString(16);
+  o.gambasx='#'+(Math.random()*0xFFFFFF<<0).toString(16);
+  o.bracciodx='#'+(Math.random()*0xFFFFFF<<0).toString(16);
+  o.bracciosx='#'+(Math.random()*0xFFFFFF<<0).toString(16);
   o.px=Math.random()*750;
   o.py=Math.random()*550;
   //TODO aggiungi 3d-like
@@ -30,27 +32,27 @@ function omino() {
 
   	//then, we draw
     c.save();
-	c.translate(o.px,o.py);
-	//body
-	c.fillStyle=o.corpo;
-	c.fillRect(15,10,15,20);
-	//head
-	c.fillStyle=o.testa;
-	c.beginPath();
-	c.arc(22,5,5,0,2*Math.PI);
-	c.fill()
-	//arms
-	c.fillStyle=o.bracciosx;
-	c.fillRect(10,15,5,10);
-	c.fillStyle=o.bracciodx;
-	c.fillRect(30,15,5,10);
-	//legs (OMG, he skipped leg day)
-	c.fillStyle=o.gambasx;
-	c.fillRect(15,28,5,15);
-	c.fillStyle=o.gambadx;
-	c.fillRect(25,28,5,15);
+  	c.translate(o.px,o.py);
+  	//body
+  	c.fillStyle=o.corpo;
+  	c.fillRect(15,10,15,20);
+  	//head
+  	c.fillStyle=o.testa;
+  	c.beginPath();
+  	c.arc(22,5,5,0,2*Math.PI);
+  	c.fill();
+  	//arms
+  	c.fillStyle=o.bracciosx;
+  	c.fillRect(10,15,5,10);
+  	c.fillStyle=o.bracciodx;
+  	c.fillRect(30,15,5,10);
+  	//legs (OMG, he skipped leg day)
+  	c.fillStyle=o.gambasx;
+  	c.fillRect(15,28,5,15);
+  	c.fillStyle=o.gambadx;
+  	c.fillRect(25,28,5,15);
 
-	c.restore();
+  	c.restore();
   }
   return o;
 }
@@ -72,6 +74,7 @@ train.draw=function () {
 	c.arc(40,43,7,0,2*Math.PI);
 	c.fill()
 	c.restore();
+	//TODO si risparmi
 	//move it
 	train.px-=3;
 	if(train.px<-50)
@@ -158,8 +161,9 @@ function run()
     c.fillText(totaltime.toFixed(1)+"s",710,35);
 
     //collision check
-    //console.log(pg.px+" "+pg.py);
-    if(pg.px>train.px && pg.px<train.px+20 && pg.py>train.py && pg.py<train.py+20)
+    //console.log(pg.px+" "+pg.py+" Treno:"+train.px+" "+train.py);
+    if(train.px<pg.px && pg.px<train.px+20 && train.py<pg.py && pg.py<train.py+20)
+    //if(pg.px>train.px && pg.px<train.px+20 && pg.py>train.py && pg.py<train.py+20)
     //if(Math.abs(pg.px-train.px+10)<10 && Math.abs(pg.py-train.py+10)<10) BIGGER :O
     {
     	c.fillStyle="Green";
@@ -170,7 +174,7 @@ function run()
     	clearInterval(activeTask);
     }
     else if(pg.px>800 || pg.px<-50 || pg.py>600 || pg.py<-50)
-    //else if(pg.px%800<0 || pg.py%600<0)
+    //else if((pg.px+100)%900<50 || (pg.py+100)%700<50) //BIGGER, apparently
     {
     	c.fillStyle="Red";
     	c.fillRect(200,200,400,200);
@@ -179,10 +183,4 @@ function run()
     	c.fillText("FAILED!",240,320);
     	clearInterval(activeTask);
     } 
-}
-
-//TODO magari fare a meno di queste
-function randColor()
-{
-	return '#'+(Math.random()*0xFFFFFF<<0).toString(16);
 }
