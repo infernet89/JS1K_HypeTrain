@@ -155,7 +155,7 @@ function run()
     pg.draw();
     c.restore();
     c.fillStyle="Black";
-    c.font = "30px Arial";
+    c.font = "30px Serif";
     c.fillText("Take me to the train!",40,35);
     totaltime+=0.033;
     c.fillText(totaltime.toFixed(1)+"s",710,35);
@@ -167,9 +167,9 @@ function run()
     //if(Math.abs(pg.px-train.px+10)<10 && Math.abs(pg.py-train.py+10)<10) BIGGER :O
     {
     	c.fillStyle="Green";
-    	c.fillRect(300,270,120,50);
+    	c.fillRect(300,270,80,40);
     	c.fillStyle="Black";
-    	c.font = "30px Arial";
+    	c.font = "30px Serif";
     	c.fillText("NICE!",300,300);
     	clearInterval(activeTask);
     }
@@ -177,9 +177,9 @@ function run()
     //else if((pg.px+100)%900<50 || (pg.py+100)%700<50) //BIGGER, apparently
     {
     	c.fillStyle="Red";
-    	c.fillRect(300,270,120,50);
+    	c.fillRect(300,270,80,40);
     	c.fillStyle="Black";
-    	c.font = "30px Arial";
+    	c.font = "30px Serif";
     	c.fillText("FAIL!",300,300);
     	clearInterval(activeTask);
     } 
