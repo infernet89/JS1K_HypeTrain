@@ -89,34 +89,9 @@ var passanti=[];
 pg=omino();
 pg.sx/=2;
 pg.sy/=2;
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
-passanti.push(omino());
+//for(i=0;i<30;i++) passanti.push(omino());
+i = 30; 
+while(i--) passanti.push(omino());
 
 passanti.push(pg);
 passanti.push(train);
@@ -159,7 +134,7 @@ function run()
     c.fillStyle="Black";
     c.font = "30px Serif";
     c.fillText("Take me to the train!",40,35);
-    //COSTA 53B
+    //COSTA 53B (complessivo)
     totaltime+=0.033;
     c.fillText(totaltime.toFixed(1)+"s",710,35);
 
