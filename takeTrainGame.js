@@ -131,8 +131,8 @@ function run()
     //c.globalAlpha=0.9;
     pg.draw();
     c.restore();
-    c.fillStyle="Black";
     c.font = "30px Serif";
+    c.fillStyle="Black";
     c.fillText("Take me to the train!",40,35);
     //COSTA 53B (complessivo)
     totaltime+=0.033;
@@ -140,13 +140,13 @@ function run()
 
     //collision check
     //console.log(pg.px+" "+pg.py+" Treno:"+t.px+" "+t.py);
-    if(t.px<pg.px && pg.px<t.px+20 && t.py<pg.py && pg.py<t.py+20)
+    if(t.px<pg.px && t.py<pg.py && pg.px<t.px+20 && pg.py<t.py+20)
     //if(pg.px>t.px && pg.px<t.px+20 && pg.py>t.py && pg.py<t.py+20)
     //if(Math.abs(pg.px-t.px+10)<10 && Math.abs(pg.py-t.py+10)<10) BIGGER :O
     {
     	c.fillStyle="Green";
-    	c.fillRect(300,270,80,40);
-    	c.fillStyle="Black";
+    	/*c.fillRect(300,270,80,40);
+    	c.fillStyle="Black";*/
     	//c.font = "30px Serif";
     	c.fillText("NICE!",300,300);
     	clearInterval(activeTask);
@@ -155,8 +155,8 @@ function run()
     //else if((pg.px+100)%900<50 || (pg.py+100)%700<50) //BIGGER, apparently
     {
     	c.fillStyle="Red";
-    	c.fillRect(300,270,80,40);
-    	c.fillStyle="Black";
+    	/*c.fillRect(300,270,80,40);
+    	c.fillStyle="Black";*/
     	//c.font = "30px Serif";
     	c.fillText("FAIL!",300,300);
     	clearInterval(activeTask);
