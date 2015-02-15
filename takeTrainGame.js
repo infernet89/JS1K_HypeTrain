@@ -2,7 +2,8 @@
 Refactor manuale variabili:
 speedx=sx
 speedy=sy
-2 * Math.PI=6.3
+2 * Math.PI=6.3=7
+train = t
 */
 function omino() {
   var o=new Object();
@@ -57,14 +58,14 @@ function omino() {
   }
   return o;
 }
-train=new Object();
-train.px=800;
-train.py=Math.random()*450+100;
+t=new Object();
+t.px=800;
+t.py=Math.random()*450+100;
 //TODO aggiungi 3d-like
-train.draw=function () {
+t.draw=function () {
 	c.save();
 
-	c.translate(train.px,train.py);
+	c.translate(t.px,t.py);
 	c.fillStyle="Black";
 	//structure
 	c.fillRect(0,15,50,23);
@@ -79,10 +80,10 @@ train.draw=function () {
 
 	//TODO si risparmia togliendo il movimento
 	//move it
-	if((train.px-=3)<-50)
+	if((t.px-=3)<-50)
 	{
-		train.px=800;
-		train.py=Math.random()*450+100;
+		t.px=800;
+		t.py=Math.random()*450+100;
 	}
 }
 var passanti=[];
@@ -90,11 +91,10 @@ pg=omino();
 pg.sx/=2;
 pg.sy/=2;
 //for(i=0;i<30;i++) passanti.push(omino());
-i = 30; 
-while(i--) passanti.push(omino());
+for(i=30;i--;) passanti.push(omino());
 
 passanti.push(pg);
-passanti.push(train);
+passanti.push(t);
 
 //keyboard controls
 var Kpressed=[];
@@ -139,10 +139,10 @@ function run()
     c.fillText(totaltime.toFixed(1)+"s",710,35);
 
     //collision check
-    //console.log(pg.px+" "+pg.py+" Treno:"+train.px+" "+train.py);
-    if(train.px<pg.px && pg.px<train.px+20 && train.py<pg.py && pg.py<train.py+20)
-    //if(pg.px>train.px && pg.px<train.px+20 && pg.py>train.py && pg.py<train.py+20)
-    //if(Math.abs(pg.px-train.px+10)<10 && Math.abs(pg.py-train.py+10)<10) BIGGER :O
+    //console.log(pg.px+" "+pg.py+" Treno:"+t.px+" "+t.py);
+    if(t.px<pg.px && pg.px<t.px+20 && t.py<pg.py && pg.py<t.py+20)
+    //if(pg.px>t.px && pg.px<t.px+20 && pg.py>t.py && pg.py<t.py+20)
+    //if(Math.abs(pg.px-t.px+10)<10 && Math.abs(pg.py-t.py+10)<10) BIGGER :O
     {
     	c.fillStyle="Green";
     	c.fillRect(300,270,80,40);
