@@ -7,8 +7,8 @@ train = t
 */
 function omino() {
   var o=new Object();
-  o.sx=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()));
-  o.sy=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()));
+  o.sx=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()+2));
+  o.sy=(5*Math.random()+2)*Math.pow(-1,Math.ceil(5*Math.random()+2));
   //o.sx=(5*Math.random()+2); //-20B
   //o.sy=(5*Math.random()+2); //
   //every man has 6 colors (can be reduced)
@@ -59,8 +59,8 @@ function omino() {
   return o;
 }
 t=new Object();
-t.px=800;
-t.py=Math.random()*450+100;
+t.px=0;
+//t.py=Math.random()*450+100;
 //TODO aggiungi 3d-like
 t.draw=function () {
 	c.save();
