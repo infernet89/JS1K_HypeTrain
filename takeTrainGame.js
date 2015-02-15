@@ -124,7 +124,7 @@ function run()
     c.save();
     //c.globalAlpha=0.6;
     c.fillStyle="Gray";
-    c.fillRect(0,0,330,50);
+    c.fillRect(0,0,300,50);
     c.fillRect(700,0,100,50);
     c.scale(0.7,0.7);
     c.translate(9-pg.px,9-pg.py);
