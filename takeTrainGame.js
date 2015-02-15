@@ -127,7 +127,7 @@ function run()
     c.fillRect(0,0,330,50);
     c.fillRect(700,0,100,50);
     c.scale(0.7,0.7);
-    c.translate(-pg.px+9,-pg.py+9);
+    c.translate(9-pg.px,9-pg.py);
     //c.globalAlpha=0.9;
     pg.draw();
     c.restore();
